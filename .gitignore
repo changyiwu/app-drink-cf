@@ -1,0 +1,16 @@
+desktop.ini
+*.tmp
+~$*
+.env
+.env.*
+.dev.vars*
+*.key
+credentials.*
+handoff.md
+node_modules/
+.npm-cache/
+.local-config/
+dist/
+.wrangler/
+*.sqlite
+*.sql.bak

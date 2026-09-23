@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作伙喝飲料！- 即時飲料訂購系統</title>
+  
+  <!-- SEO & Social Share (Open Graph) -->
+  <meta name="description" content="讓朋友和同事輕鬆一起訂購飲料的即時系統。填寫品項、姓名與冰度甜度，大家就能即時看到所有人的訂單，再也不怕訂錯或漏單！">
+  <meta property="og:title" content="作伙喝飲料！- 即時飲料訂購系統">
+  <meta property="og:description" content="輸入飲料、姓名與冰度甜度，即時連線看板讓所有人看到目前訂購情形，快來一起訂飲料吧！">
+  <meta property="og:type" content="website">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Favicon & 行動瀏覽器主題色 -->
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#D84315">
+
+  <!-- Noto Sans TC & Outfit Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for modern look -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="shop-page">
+  <!-- Background decorative blobs for premium gradient UI -->
+  <div class="glass-bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Action panel: Back button -->
+    <div class="shop-header-actions">
+      <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> 返回店家選擇</a>
+    </div>
+
+      <!-- Header banner section -->
+    <header class="app-header">
+      <div class="banner-wrapper">
+        <picture>
+          <source srcset="images/drink_banner.webp" type="image/webp">
+          <img src="images/drink_banner.jpg" alt="美味茶飲橫幅" class="header-banner" width="1600" height="480" fetchpriority="high">
+        </picture>
+        <div class="banner-overlay"></div>
+      </div>
+      <div class="header-title-container">
+        <div class="logo-badge"><i class="fa-solid fa-mug-hot"></i></div>
+        <h1 id="shop-title">載入中...</h1>
+        <p class="subtitle" id="shop-subtitle">朋友同事專屬 · 即時訂單看板</p>
+        <div style="margin-top: 8px;">
+          <a id="shop-menu-link" href="#" target="_blank" class="menu-external-link">
+            <i class="fa-solid fa-link"></i> 相關連結
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- Order Form Section -->
+      <section class="form-section glass-card" aria-labelledby="form-heading">
+        <h2 id="form-heading"><i class="fa-regular fa-pen-to-square"></i> 我要訂飲料</h2>
+        <form id="order-form" novalidate>
+          
+          <div class="input-group">
+            <label for="buyer-name"><i class="fa-regular fa-user"></i> 你的姓名 <span class="required">*</span></label>
+            <input type="text" id="buyer-name" placeholder="請輸入姓名 (例如：冠宇)" required autocomplete="name">
+            <span class="error-msg" id="name-error">請填寫姓名</span>
+          </div>
+
+          <div class="input-group">
+            <label for="drink-name"><i class="fa-solid fa-whiskey-glass"></i> 飲料品項 <span class="required">*</span></label>
+            <div class="select-wrapper">
+              <select id="drink-name" required>
+                <option value="" disabled selected>請選擇飲料品項</option>
+                <!-- Dynamic options loaded by JS -->
+              </select>
+              <i class="fa-solid fa-chevron-down select-arrow"></i>
+            </div>
+            <span class="error-msg" id="drink-error">請選擇要喝的飲料</span>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group width-half">
+              <label for="cup-size"><i class="fa-solid fa-expand"></i> 容量 <span class="required">*</span></label>
+              <div class="select-wrapper">
+                <select id="cup-size" required>
+                  <option value="" disabled selected>請選擇容量</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+              <span class="error-msg" id="size-error">請選擇容量</span>
+            </div>
+
+            <div class="input-group width-half">
+              <label for="sweetness"><i class="fa-solid fa-cubes-stacked"></i> 糖量 <span class="required">*</span></label>
+              <div class="select-wrapper">
+                <select id="sweetness" required>
+                  <option value="" disabled selected>請選擇糖量</option>
+                  <option value="無糖">無糖 (0%)</option>
+                  <option value="一分糖">一分糖 (10%)</option>
+                  <option value="三分糖">三分糖 (30%)</option>
+                  <option value="五分糖">五分糖 (50%)</option>
+                  <option value="全糖">全糖 (100%)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+              <span class="error-msg" id="sweetness-error">請選擇糖量</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group width-half">
+              <label for="ice-level"><i class="fa-solid fa-snowflake"></i> 冰塊量 <span class="required">*</span></label>
+              <div class="select-wrapper">
+                <select id="ice-level" required>
+                  <option value="" disabled selected>請選擇冰塊量</option>
+                  <option value="去冰">去冰 (No Ice)</option>
+                  <option value="微冰">微冰 (Easy Ice)</option>
+                  <option value="少冰">少冰 (Less Ice)</option>
+                  <option value="正常冰">正常冰 (Regular Ice)</option>
+                  <option value="熱飲">熱飲 (Hot)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+              <span class="error-msg" id="ice-error">請選擇冰塊量</span>
+            </div>
+
+            <div class="input-group width-half">
+              <label for="cup-count"><i class="fa-solid fa-hashtag"></i> 杯數 <span class="required">*</span></label>
+              <div class="number-stepper">
+                <button type="button" class="stepper-btn" id="stepper-minus"><i class="fa-solid fa-minus"></i></button>
+                <input type="number" id="cup-count" value="1" min="1" max="100" required>
+                <button type="button" class="stepper-btn" id="stepper-plus"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submit-order-btn">
+            <span class="btn-text">送出訂單</span>
+            <span class="btn-icon"><i class="fa-solid fa-paper-plane"></i></span>
+          </button>
+        </form>
+      </section>
+
+      <!-- Orders Board Section -->
+      <section class="board-section glass-card" aria-labelledby="board-heading">
+        <div class="board-header">
+          <h2 id="board-heading"><i class="fa-solid fa-list-check"></i> 即時訂購看板</h2>
+          <div class="live-indicator">
+            <span class="pulse-dot"></span>
+            <span class="indicator-text">已連線</span>
+          </div>
+        </div>
+
+        <!-- Order Statistics -->
+        <div class="stats-container">
+          <div class="stat-card">
+            <div class="stat-icon icon-blue"><i class="fa-solid fa-user-group"></i></div>
+            <div class="stat-info">
+              <span class="stat-label">訂購總人數</span>
+              <span class="stat-value" id="stat-people">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-orange"><i class="fa-solid fa-whiskey-glass"></i></div>
+            <div class="stat-info">
+              <span class="stat-label">飲料總杯數</span>
+              <span class="stat-value" id="stat-cups">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orders List -->
+        <div class="orders-list-wrapper">
+          <div class="orders-table-header">
+            <span class="col-name">訂購人</span>
+            <span class="col-drink">飲料品項</span>
+            <span class="col-specs">規格 (糖量/冰塊)</span>
+            <span class="col-cups">數量</span>
+            <span class="col-action">操作</span>
+          </div>
+          
+          <div id="orders-list" class="orders-list">
+            <!-- Loading skeleton loader -->
+            <div class="skeleton-loader">
+              <div class="skeleton-row"></div>
+              <div class="skeleton-row"></div>
+              <div class="skeleton-row"></div>
+            </div>
+          </div>
+
+          <div id="empty-state" class="empty-state hidden">
+            <div class="empty-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+            <h3>目前還沒有人訂購喔！</h3>
+            <p>填寫左側表單，成為今天第一個喝飲料的人吧！</p>
+          </div>
+        </div>
+
+        <!-- Consolidated Order Statistics Section -->
+        <div class="summary-section">
+          <h2><i class="fa-solid fa-calculator"></i> 訂單統計加總</h2>
+          <div class="stats-table-wrapper">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>品項名稱</th>
+                  <th>糖量 / 冰塊</th>
+                  <th style="text-align: center; width: 80px;">總數量</th>
+                  <th style="text-align: center; width: 100px;">總金額</th>
+                </tr>
+              </thead>
+              <tbody id="summary-table-body">
+                <tr>
+                  <td colspan="4" style="text-align: center; color: var(--text-muted);">無統計資料</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Personal Payment Summary Section -->
+        <div class="summary-section" style="margin-top: 32px;">
+          <h2><i class="fa-solid fa-comments-dollar"></i> 每人應付金額統計</h2>
+          <div class="stats-table-wrapper">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th style="width: 120px;">訂購人</th>
+                  <th>訂購明細</th>
+                  <th style="text-align: center; width: 100px;">應付金額</th>
+                </tr>
+              </thead>
+              <tbody id="payment-table-body">
+                <tr>
+                  <td colspan="3" style="text-align: center; color: var(--text-muted);">無統計資料</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- 主揪人專區：未登入只露出登入入口，登入成功後才出現清除全部訂單 -->
+          <div class="host-zone">
+            <button type="button" class="host-login-btn" id="host-login-btn">
+              <i class="fa-solid fa-key"></i>
+              <span>主揪人登入</span>
+            </button>
+
+            <div class="host-tools hidden" id="host-tools">
+              <div class="host-status">
+                <i class="fa-solid fa-user-shield"></i>
+                <span>主揪人已登入，可刪除任何人的訂單</span>
+              </div>
+              <div class="host-actions">
+                <button type="button" class="clear-btn" id="clear-all-btn" title="清除此店家的所有訂單">
+                  <i class="fa-solid fa-trash-arrow-up"></i>
+                  <span>清除本頁全部訂單</span>
+                </button>
+                <button type="button" class="host-logout-btn" id="host-logout-btn">
+                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                  <span>登出</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>© 2026 作伙喝飲料 App · 部署於 Cloudflare</p>
+    </footer>
+  </div>
+
+  <!-- 主揪人登入視窗 -->
+  <div class="modal-overlay hidden" id="host-login-modal" role="dialog" aria-modal="true" aria-labelledby="host-login-title">
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="host-login-close" aria-label="關閉登入視窗">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h2 id="host-login-title"><i class="fa-solid fa-key"></i> 主揪人登入</h2>
+      <p class="modal-desc">登入後才能刪除別人的訂單、或一次清除本頁全部訂單。一般訂購者不需要登入，也隨時可以刪除自己的訂單。</p>
+      <form id="host-login-form" novalidate>
+        <div class="input-group" id="host-password-group">
+          <label for="host-password"><i class="fa-solid fa-lock"></i> 主揪人密碼</label>
+          <input type="password" id="host-password" placeholder="請輸入密碼" autocomplete="current-password">
+          <span class="error-msg" id="host-login-error">密碼錯誤，請再試一次</span>
+        </div>
+        <button type="submit" class="submit-btn" id="host-login-submit">
+          <span class="btn-text">登入</span>
+          <span class="btn-icon"><i class="fa-solid fa-right-to-bracket"></i></span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="toast hidden" role="alert" aria-live="assertive"></div>
+
+  <!-- Cloudflare API 前端 -->
+  <script type="module" src="shop.js"></script>
+</body>
+</html>

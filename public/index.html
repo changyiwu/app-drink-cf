@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作伙喝飲料！- 即時飲料訂購系統</title>
+  
+  <!-- SEO & Social Share (Open Graph) -->
+  <meta name="description" content="讓朋友和同事輕鬆一起訂購飲料的即時系統。選擇喜歡的飲料店，大家就能即時看到所有人的訂單，再也不怕訂錯或漏單！">
+  <meta property="og:title" content="作伙喝飲料！- 即時飲料訂購系統">
+  <meta property="og:description" content="選擇飲料店、輸入姓名與冰度甜度，即時連線看板讓所有人看到目前訂購情形，快來一起訂飲料吧！">
+  <meta property="og:type" content="website">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Favicon & 行動瀏覽器主題色 -->
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#D84315">
+
+  <!-- Noto Sans TC & Outfit Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for modern look -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Background decorative blobs for premium gradient UI -->
+  <div class="glass-bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header banner section -->
+    <header class="app-header">
+      <div class="banner-wrapper">
+        <picture>
+          <source srcset="images/drink_banner.webp" type="image/webp">
+          <img src="images/drink_banner.jpg" alt="美味茶飲橫幅" class="header-banner" width="1600" height="480" fetchpriority="high">
+        </picture>
+        <div class="banner-overlay"></div>
+      </div>
+      <div class="header-title-container">
+        <div class="logo-badge"><i class="fa-solid fa-mug-hot"></i></div>
+        <h1>作伙喝飲料</h1>
+        <p class="subtitle">朋友同事專屬 · 即時訂單看板平台</p>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="shop-selection-section glass-card" style="grid-column: 1 / -1;">
+        <h2><i class="fa-solid fa-store"></i> 請選擇要訂購的飲料店</h2>
+        <p class="section-desc" style="color: var(--text-muted); margin-bottom: 24px; font-size: 1rem;">點選下方飲料店即可進入專屬訂購頁面，與好友同事即時同步訂單！</p>
+        
+        <div class="shop-grid">
+          <a href="shop.html?shop=50lan" class="shop-card theme-50lan">
+            <div class="shop-card-content">
+              <div class="shop-logo"><img src="images/logo_50lan.webp" alt="50嵐" loading="lazy"></div>
+              <h3>50嵐</h3>
+              <p>經典不敗 ‧ 四季春珍波椰</p>
+            </div>
+            <div class="shop-card-action">
+              <span>進入訂購</span> <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </a>
+
+          <a href="shop.html?shop=chingshin" class="shop-card theme-chingshin">
+            <div class="shop-card-content">
+              <div class="shop-logo"><img src="images/logo_chingshin.png" alt="清心福全" loading="lazy"></div>
+              <h3>清心福全</h3>
+              <p>手搖始祖 ‧ 隱藏版普洱與菁茶</p>
+            </div>
+            <div class="shop-card-action">
+              <span>進入訂購</span> <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </a>
+
+          <a href="shop.html?shop=coco" class="shop-card theme-coco">
+            <div class="shop-card-content">
+              <div class="shop-logo"><img src="images/logo_coco.webp" alt="CoCo 都可" loading="lazy"></div>
+              <h3>CoCo 都可</h3>
+              <p>百香雙響炮 ‧ 奶茶三兄弟</p>
+            </div>
+            <div class="shop-card-action">
+              <span>進入訂購</span> <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </a>
+
+          <a href="shop.html?shop=presotea" class="shop-card theme-presotea">
+            <div class="shop-card-content">
+              <div class="shop-logo"><img src="images/logo_presotea.webp" alt="鮮茶道" loading="lazy"></div>
+              <h3>鮮茶道</h3>
+              <p>現點現泡 ‧ 琥珀奶茶與阿里山茶</p>
+            </div>
+            <div class="shop-card-action">
+              <span>進入訂購</span> <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </a>
+
+          <a href="shop.html?shop=mrwish" class="shop-card theme-mrwish">
+            <div class="shop-card-content">
+              <div class="shop-logo"><img src="images/logo_mrwish.svg" alt="Mr. Wish" loading="lazy"></div>
+              <h3>Mr. Wish</h3>
+              <p>新鮮果茶 ‧ 光果茶與楊枝甘露</p>
+            </div>
+            <div class="shop-card-action">
+              <span>進入訂購</span> <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="share-section glass-card" style="grid-column: 1 / -1;">
+        <h2><i class="fa-solid fa-share-nodes"></i> 分享這個頁面</h2>
+        <div class="share-content">
+          <div class="share-text">
+            <p>複製本站網址，分享給朋友或同事挑選飲料店。</p>
+            <a class="share-link" id="shareLink" href="/">本站首頁</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>© 2026 作伙喝飲料 App · 部署於 Cloudflare</p>
+    </footer>
+  </div>
+
+  <script>
+    const shareLink = document.getElementById('shareLink');
+    shareLink.href = location.origin + '/';
+    shareLink.textContent = shareLink.href;
+  </script>
+</body>
+</html>
