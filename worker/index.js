@@ -89,6 +89,23 @@ function validOrder(data) {
   return { shop, price, buyerName: data.buyerName.trim() };
 }
 
+async function allowOrder(request, env, ownerId) {
+  // 重用既有計數表；鍵值加前綴，與管理員登入失敗的計數分開。
+  const ip = request.headers.get('CF-Connecting-IP') || 'local';
+  const keys = [
+    { key: `order-ip:${await hmac(ip, env.SESSION_SECRET)}`, limit: 120 },
+    { key: `order-owner:${await hmac(ownerId, env.SESSION_SECRET)}`, limit: 30 }
+  ];
+  const now = Date.now();
+  for (const { key, limit } of keys) {
+    await env.DB.prepare('INSERT INTO login_attempts (ip_hash, attempts, window_start) VALUES (?, 1, ?) ON CONFLICT(ip_hash) DO UPDATE SET attempts = CASE WHEN ? - window_start >= 900000 THEN 1 ELSE attempts + 1 END, window_start = CASE WHEN ? - window_start >= 900000 THEN ? ELSE window_start END')
+      .bind(key, now, now, now, now).run();
+    const counter = await env.DB.prepare('SELECT attempts FROM login_attempts WHERE ip_hash = ?').bind(key).first();
+    if (counter.attempts > limit) return false;
+  }
+  return true;
+}
+
 async function handle(request, env) {
   const url = new URL(request.url);
   const path = url.pathname;
@@ -123,6 +140,7 @@ async function handle(request, env) {
     const data = await body(request);
     const valid = validOrder(data);
     if (!valid) return fail('訂單資料不正確');
+    if (!await allowOrder(request, env, id)) return fail('送單太頻繁，請稍後再試', 429);
     const orderId = crypto.randomUUID();
     const createdAt = new Date().toISOString();
     await env.DB.prepare('INSERT INTO orders (id, owner_id, shop_id, shop_name, buyer_name, drink_name, size, price, cups, sweetness, ice, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
