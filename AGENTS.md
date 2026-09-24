@@ -15,7 +15,7 @@
 - [x] 複製前端素材並移除 Firebase 依賴
 - [x] 建立 Cloudflare Worker API 與 D1 遷移檔
 - [x] 驗證本機訂單與主揪人流程
-- [ ] 建立正式 D1、設定密鑰、部署 Worker
+- [x] 建立正式 D1、設定密鑰、部署 Worker
 - [ ] 取得正式網址後補上 OG 絕對網址與新版分享 QR Code
 
 ## 資料夾結構

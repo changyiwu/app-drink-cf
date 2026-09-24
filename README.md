@@ -2,6 +2,8 @@
 
 以 `drink-ordering-gh` 為基礎的獨立副本。前端沿用原頁面與五家店菜單；Cloudflare Workers 提供靜態頁面與 API，D1 保存訂單。資料不與來源專案的 Firebase 共用。
 
+正式網址：<https://drink-ordering-cf.changyiwu.workers.dev/>
+
 ## 本機開發
 
 需要 Node.js 20 以上。安裝依賴：
@@ -21,7 +23,7 @@ ADMIN_PASSWORD_HASH=<主揪人密碼的 SHA-256 小寫十六進位雜湊>
 
 ```powershell
 node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"
-node -e "console.log(require('node:crypto').createHash('sha256').update('你自己選的長密碼').digest('hex'))"
+node -e "console.log(require('node:crypto').createHash('sha256').update('你自己選的密碼').digest('hex'))"
 ```
 
 初始化本機資料庫並啟動：
@@ -38,8 +40,8 @@ npm run dev
 1. 用 `npx wrangler whoami` 確認帳號。
 2. 本專案的正式 D1 已建立於 APAC，ID 已寫入 `wrangler.jsonc`。
 3. 套用正式 D1 遷移：`npx wrangler d1 migrations apply drink-ordering-cf --remote`。
-4. `npm run build` 後由使用者執行 `npx wrangler deploy`。首次部署至密鑰設定完成前，API 會回覆 503。
-5. 由使用者在互動終端執行 `./tools/set-production-secrets.ps1`，輸入至少 16 字元的主揪人密碼；腳本會一次上傳兩個 Cloudflare secrets，不輸出或儲存密碼。重新執行會輪替 `SESSION_SECRET`，使既有訪客的訂單 Cookie 失效，因此腳本預設會拒絕更新已存在的密鑰。
+4. `npm run build` 後由使用者執行 `npx wrangler deploy`。若終端機視窗會立刻關閉，可在檔案總管雙擊 `tools/deploy-interactive.cmd`；它會執行同一指令並停在結果畫面。首次部署至密鑰設定完成前，API 會回覆 503。
+5. 由使用者在互動終端執行 `./tools/set-production-secrets.ps1`，或在檔案總管雙擊 `tools/secrets-interactive.cmd`，輸入至少 8 字元的主揪人密碼（建議使用不易猜的隨機組合）；腳本會透過已登入的 Wrangler 憑證一次上傳兩個 Cloudflare secrets，並向 Cloudflare 回查名稱。不輸出或儲存密碼。重新執行會輪替 `SESSION_SECRET`，使既有訪客的訂單 Cookie 失效，因此腳本預設會拒絕更新已存在的密鑰。
 6. 用 `npx wrangler secret list` 確認兩個密鑰名稱，再驗證網站的下單與主揪人流程。
 
 正式資源建立、資料表變更與部署各步要確認目標帳號及授權。密碼本身請存進自己的密碼管理器，不要貼進對話或提交到 Git。
@@ -53,6 +55,12 @@ npm run dev
 - 送單限制為同一訪客每 15 分鐘最多 30 筆、同一來源 IP 最多 120 筆。
 - 菜單與價格由後端依 `public/menu_data.js` 驗證，瀏覽器送來的價格不被採用。
 
-## 尚待正式網址
+## 分享網址與 QR Code
 
-為避免分享至舊版 GitHub Pages，已移除舊 QR Code 與 OG 絕對網址。正式部署後應補上新網址並重新產生 QR Code。
+首頁、五家店的分享入口與 `shop.html` 已使用正式網址的 OG 標籤。`public/images/qr_home.svg` 連到正式首頁。若未來網址改變，先更新七個 HTML 檔的 OG／canonical 與首頁分享文字，再重新產生 QR Code：
+
+```powershell
+uv run --no-project --with qrcode python tools/generate-qr.py https://新的正式網址/
+```
+
+最後執行 `npm run check`，並由使用者再次部署，使靜態資產更新到正式站。
