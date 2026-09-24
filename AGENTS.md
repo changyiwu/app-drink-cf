@@ -16,14 +16,14 @@
 - [x] 建立 Cloudflare Worker API 與 D1 遷移檔
 - [x] 驗證本機訂單與主揪人流程
 - [x] 建立正式 D1、設定密鑰、部署 Worker
-- [ ] 取得正式網址後補上 OG 絕對網址與新版分享 QR Code
+- [x] 取得正式網址後補上 OG 絕對網址與新版分享 QR Code
 
 ## 資料夾結構
 
 ```text
 drink-ordering-cf/
 ├─ public/             # 從來源專案複製並改接 API 的前端
-│  ├─ images/          # 圖片素材與原圖（不含來源網站的舊 QR Code）
+│  ├─ images/          # 圖片素材、原圖與正式網站的新 QR Code
 │  ├─ index.html       # 首頁
 │  ├─ shop.html        # 訂購頁
 │  ├─ shop.js          # Cloudflare API 用戶端與看板
