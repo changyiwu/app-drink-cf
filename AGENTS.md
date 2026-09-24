@@ -46,6 +46,7 @@ drink-ordering-cf/
 - 菜單與價格以 `public/menu_data.js` 為準；Worker 必須重新驗證品項、尺寸與價格，不能信任瀏覽器傳來的價格。
 - 訂單擁有權由 Worker 簽章的 HttpOnly Cookie 判定，管理員憑證只存在 HttpOnly Cookie 與 D1 中的雜湊值。前端按鈕顯示不是授權邊界。
 - `SESSION_SECRET` 與 `ADMIN_PASSWORD_HASH` 只放 Cloudflare secret 或本機忽略的 `.dev.vars`，不可進 git。
+- 輪替 `SESSION_SECRET` 會使既有訂單的擁有權 Cookie 失效；正式站有訂單時，先確認影響再輪替。
 - D1 結構變更一律新增遷移檔，不修改已套用的遷移。
 - 本專案的 D1 與原 Firebase 訂單彼此獨立，不自動搬移既有訂單。
 - 訂單姓名會顯示在公開看板；正式使用時只填班級代號或暱稱，不儲存學生真名。
