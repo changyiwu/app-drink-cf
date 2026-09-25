@@ -1,6 +1,6 @@
 # 作伙喝飲料 Cloudflare 版
 
-以 `drink-ordering-gh` 為基礎的獨立副本。前端沿用原頁面與五家店菜單；Cloudflare Workers 提供靜態頁面與 API，D1 保存訂單。資料不與來源專案的 Firebase 共用。
+以 `drink-ordering-fb` 為基礎的獨立副本。前端沿用原頁面與五家店菜單；Cloudflare Workers 提供靜態頁面與 API，D1 保存訂單。資料不與來源專案的 Firebase 共用。
 
 正式網址：<https://drink-ordering-cf.changyiwu.workers.dev/>
 

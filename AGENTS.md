@@ -4,7 +4,7 @@
 
 ## 專案簡介
 
-以 `drink-ordering-gh` 為來源的獨立飲料訂購系統副本。保留原有五家店的頁面、菜單、圖片與看板，前端改由 Cloudflare Workers 靜態資產提供，後端以 Worker API 和 D1 儲存訂單。
+以 `drink-ordering-fb` 為來源的獨立飲料訂購系統副本。保留原有五家店的頁面、菜單、圖片與看板，前端改由 Cloudflare Workers 靜態資產提供，後端以 Worker API 和 D1 儲存訂單。
 
 ## 關鍵時程
 
@@ -42,7 +42,7 @@ drink-ordering-cf/
 
 ## 專案專屬規則
 
-- `drink-ordering-gh` 是來源專案，這個副本不得回寫來源資料夾或連到來源 Firebase 專案。
+- `drink-ordering-fb` 是來源專案，這個副本不得回寫來源資料夾或連到來源 Firebase 專案。
 - 菜單與價格以 `public/menu_data.js` 為準；Worker 必須重新驗證品項、尺寸與價格，不能信任瀏覽器傳來的價格。
 - 訂單擁有權由 Worker 簽章的 HttpOnly Cookie 判定，管理員憑證只存在 HttpOnly Cookie 與 D1 中的雜湊值。前端按鈕顯示不是授權邊界。
 - `SESSION_SECRET` 與 `ADMIN_PASSWORD_HASH` 只放 Cloudflare secret 或本機忽略的 `.dev.vars`，不可進 git。
