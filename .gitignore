@@ -14,3 +14,6 @@ dist/
 .wrangler/
 *.sqlite
 *.sql.bak
+
+# 產出一律放 output/，不進 git
+output/
