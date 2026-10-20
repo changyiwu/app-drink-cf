@@ -1,12 +1,12 @@
 {
-  "name": "drink-ordering-cf",
+  "name": "app-drink-cf",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "node tools/build.mjs",
     "dev": "npm run build && wrangler dev",
-    "db:local": "wrangler d1 migrations apply drink-ordering-cf --local",
+    "db:local": "wrangler d1 migrations apply app-drink-cf --local",
     "check": "node --check worker/index.js && node --check public/shop.js && npm run build"
   },
   "devDependencies": {

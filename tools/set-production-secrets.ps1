@@ -17,7 +17,7 @@ try {
   $tokenMatch = [regex]::Match($configText, '(?m)^oauth_token\s*=\s*"([^"]+)"')
   if (-not $tokenMatch.Success) { throw '無法從 Wrangler 登入資料取得授權。' }
   $headers = @{ Authorization = 'Bearer ' + $tokenMatch.Groups[1].Value }
-  $secretsUri = 'https://api.cloudflare.com/client/v4/accounts/30cb6bca91b0e5ad59b005b86c62752b/workers/scripts/drink-ordering-cf/secrets'
+  $secretsUri = 'https://api.cloudflare.com/client/v4/accounts/30cb6bca91b0e5ad59b005b86c62752b/workers/scripts/app-drink-cf/secrets'
 
   if (-not $Rotate) {
     Write-Host '本程式只供首次設定。若正式站已有 SESSION_SECRET，重新設定會使既有訪客失去訂單刪除權；要刻意輪替時才加 -Rotate。'

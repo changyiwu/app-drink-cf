@@ -1,8 +1,8 @@
 # 作伙喝飲料 Cloudflare 版
 
-以 `drink-ordering-fb` 為基礎的獨立副本。前端沿用原頁面與五家店菜單；Cloudflare Workers 提供靜態頁面與 API，D1 保存訂單。資料不與來源專案的 Firebase 共用。
+以 `app-drink-fb` 為基礎的獨立副本。前端沿用原頁面與五家店菜單；Cloudflare Workers 提供靜態頁面與 API，D1 保存訂單。資料不與來源專案的 Firebase 共用。
 
-正式網址：<https://drink-ordering-cf.changyiwu.workers.dev/>
+正式網址：<https://app-drink-cf.changyiwu.workers.dev/>
 
 ## 本機開發
 
@@ -39,7 +39,7 @@ npm run dev
 
 1. 用 `npx wrangler whoami` 確認帳號。
 2. 本專案的正式 D1 已建立於 APAC，ID 已寫入 `wrangler.jsonc`。
-3. 套用正式 D1 遷移：`npx wrangler d1 migrations apply drink-ordering-cf --remote`。
+3. 套用正式 D1 遷移：`npx wrangler d1 migrations apply app-drink-cf --remote`。
 4. `npm run build` 後由使用者執行 `npx wrangler deploy`。若終端機視窗會立刻關閉，可在檔案總管雙擊 `tools/deploy-interactive.cmd`；它會執行同一指令並停在結果畫面。首次部署至密鑰設定完成前，API 會回覆 503。
 5. 由使用者在互動終端執行 `./tools/set-production-secrets.ps1`，或在檔案總管雙擊 `tools/secrets-interactive.cmd`，輸入至少 8 字元的主揪人密碼（建議使用不易猜的隨機組合）；腳本會透過已登入的 Wrangler 憑證一次上傳兩個 Cloudflare secrets，並向 Cloudflare 回查名稱。不輸出或儲存密碼。重新執行會輪替 `SESSION_SECRET`，使既有訪客的訂單 Cookie 失效，因此腳本預設會拒絕更新已存在的密鑰。
 6. 用 `npx wrangler secret list` 確認兩個密鑰名稱，再驗證網站的下單與主揪人流程。

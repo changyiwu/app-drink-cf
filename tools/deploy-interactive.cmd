@@ -2,7 +2,7 @@
 setlocal
 chcp 65001 >nul
 pushd "%~dp0.."
-echo Cloudflare Worker deploy: drink-ordering-cf
+echo Cloudflare Worker deploy: app-drink-cf
 echo.
 call npx wrangler deploy
 echo.

@@ -9,7 +9,7 @@ import qrcode
 from qrcode.image.svg import SvgPathImage
 
 
-url = sys.argv[1] if len(sys.argv) > 1 else "https://drink-ordering-cf.changyiwu.workers.dev/"
+url = sys.argv[1] if len(sys.argv) > 1 else "https://app-drink-cf.changyiwu.workers.dev/"
 if not url.startswith("https://"):
     raise SystemExit("Expected an HTTPS URL")
 
